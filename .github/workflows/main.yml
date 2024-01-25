@@ -1,5 +1,5 @@
 name: Release
-on: pull_request
+on: [pull_request, push]
 
 jobs:
   checks:
@@ -16,7 +16,7 @@ jobs:
       - name: Download dependencies
         run: flutter pub get
       - name: Build the app
-        run: flutter build apk --release
+        run: flutter build apk --release --build-number=${{github.run_number}}
       - uses: actions/upload-artifact@v4
         with:
           name: encora-pulse
